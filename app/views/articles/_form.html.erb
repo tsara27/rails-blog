@@ -1,0 +1,24 @@
+<% if @article.errors.any? %>
+    <div class="alert alert-danger">
+        <ul>
+            <% @article.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>
+
+<%= form_for @article do |f| %>
+    <div class="form-group">
+        <label>Title</label>
+        <%= f.text_field :title, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+        <label>Content</label>
+        <%= f.text_area :content, class: 'form-control', style: 'height: 250px' %>
+    </div>
+    <p>
+        <%= f.submit 'Save Article', class: 'btn btn-primary btn-block' %>
+    </p>
+<% end %>

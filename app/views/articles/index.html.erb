@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <header class="page-header">
+                <h2>There is <%= @articles.length %> articles in here</h2>
+            </header>
+            <% @articles.each do |item| %>
+                <article class="home-lists">
+                    <header>
+                        <h3>
+                            <%= link_to item.title, item %>
+                        </h3>
+                    </header>
+                    <section>
+                        <%= item.content.html_safe %>
+                    </section>
+                </article>
+            <% end %>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <article>
+                <header class="page-header">
+                    <h2>
+                        <%= @article.title %>
+                    </h2>
+                    <%= link_to 'Edit', edit_article_path(@article) %>
+                    <%= link_to 'Delete', article_path(@article), method: :delete, data: { confirm: 'Kamu yakin ?' } %>
+                </header>
+
+                <section>
+                    <%= @article.content.html_safe %>
+                </section>
+            </article>
+        </div>
+    </div>
+</div>

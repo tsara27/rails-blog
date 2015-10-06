@@ -10,12 +10,10 @@
 
 <%= form_for @article do |f| %>
     <div class="form-group">
-        <label>Title</label>
-        <%= f.text_field :title, class: 'form-control' %>
+        <%= f.text_field :title, class: 'form-control input-lg', placeholder: 'Title here ..' %>
     </div>
 
     <div class="form-group">
-        <label>Content</label>
         <%= f.text_area :content, class: 'summernote', style: 'height: 250px' %>
     </div>
     <p>

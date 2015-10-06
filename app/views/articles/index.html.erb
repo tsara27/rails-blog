@@ -1,13 +1,17 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
+            <header class="page-header text-center">
+              <%= image_tag('logo2.svg', width: '140px') %>
+              <h1>Sebab apalagi yang disisakan kematian, selain kenangan dan kata-kata.</h1>
+            </header>
             <% @articles.each do |item| %>
                 <article class="home-lists">
                     <header>
                         <h3><%= link_to item.title, item %> <small><%= time_ago_in_words(item.created_at) %> ago</small></h3>
                     </header>
                     <section>
-                        <%= item.content[0..400].html_safe %>
+                        <%= item.content[0..150].html_safe %> ..
                     </section>
                 </article>
                 <hr>

@@ -6,7 +6,7 @@
                     <h2>
                         <%= @article.title %>
                     </h2>
-                    By: <%= @article.user.email %>
+                    <small>By: <%= @article.user.email %></small>
                     <%= link_to 'Edit', edit_article_path(@article) %>
                     <%= link_to 'Delete', article_path(@article), method: :delete, data: { confirm: 'Kamu yakin ?' } %>
                 </header>

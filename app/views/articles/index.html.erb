@@ -1,20 +1,16 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-8">
-            <header class="page-header">
-                <h2>There is <%= @articles.length %> articles in here</h2>
-            </header>
+        <div class="col-md-8 col-md-offset-2">
             <% @articles.each do |item| %>
                 <article class="home-lists">
                     <header>
-                        <h3>
-                            <%= link_to item.title, item %>
-                        </h3>
+                        <h3><%= link_to item.title, item %> <small><%= time_ago_in_words(item.created_at) %> ago</small></h3>
                     </header>
                     <section>
-                        <%= item.content.html_safe %>
+                        <%= item.content[0..400].html_safe %>
                     </section>
                 </article>
+                <hr>
             <% end %>
         </div>
     </div>

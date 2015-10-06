@@ -10,19 +10,28 @@
 
 <nav class="navbar navbar-default">
     <div class="container">
-        <div class="navbar-header">
-            <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <%= link_to 'Rails Simple CRUD', articles_path, class: 'navbar-brand' %>
-        </div>
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+            <div class="navbar-header">
+                <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <%= link_to 'Blog', articles_path, class: 'navbar-brand' %>
+            </div>
 
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><%= link_to 'New Article', new_article_path %></li>
-            </ul>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <% if user_signed_in? %>
+                      <li><%= link_to 'New Article', new_article_path %></li>
+                      <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+                    <% else %>
+                      <li><%= link_to 'Sign In', new_user_session_path %></li>
+                    <% end %>
+                </ul>
+            </div>
+          </div>
         </div>
     </div>
 </nav>

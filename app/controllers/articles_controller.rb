@@ -1,49 +1,51 @@
 class ArticlesController < ApplicationController
-    def index
-        @articles = Article.all.reverse
-    end
+  before_action :authenticate_user!, except: [:index,:show]
 
-    def new
-        @article = Article.new
-    end
+  def index
+      @articles = Article.all.reverse
+  end
 
-    def edit
-        @article = Article.find(params[:id])
-    end
+  def new
+      @article = current_user.articles.build
+  end
 
-    def update
-        @article = Article.find(params[:id])
+  def edit
+      @article = Article.find(params[:id])
+  end
 
-        if @article.update(article_params)
-            redirect_to @article
-        else
-            render 'edit'
-        end
-    end
+  def update
+      @article = Article.find(params[:id])
 
-    def create
-        @article = Article.new(article_params)
+      if @article.update(article_params)
+          redirect_to @article
+      else
+          render 'edit'
+      end
+  end
 
-        if @article.save
-            redirect_to @article
-        else
-            render 'new'
-        end
-    end
+  def create
+      @article = current_user.articles.build(article_params)
 
-    def show
-        @article = Article.find(params[:id])
-    end
+      if @article.save
+          redirect_to @article
+      else
+          render 'new'
+      end
+  end
 
-    def destroy
-        @article = Article.find(params[:id])
-        @article.destroy
+  def show
+      @article = Article.find(params[:id])
+  end
 
-        redirect_to articles_path
-    end
+  def destroy
+      @article = Article.find(params[:id])
+      @article.destroy
 
-    private
-        def article_params
-            params.require(:article).permit(:title,:content)
-        end
+      redirect_to articles_path
+  end
+
+  private
+      def article_params
+          params.require(:article).permit(:title,:content)
+      end
 end

@@ -15,11 +15,4 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require jquery.turbolinks
-//= require summernote
 //= require_tree .
-
-$(document).ready(function(){
-    $(".summernote").summernote({
-        height: 300,
-    });
-})

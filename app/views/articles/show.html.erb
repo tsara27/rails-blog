@@ -1,11 +1,12 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-8 col-md-offset-2">
             <article>
                 <header class="page-header">
                     <h2>
                         <%= @article.title %>
                     </h2>
+                    By: <%= @article.user.email %>
                     <%= link_to 'Edit', edit_article_path(@article) %>
                     <%= link_to 'Delete', article_path(@article), method: :delete, data: { confirm: 'Kamu yakin ?' } %>
                 </header>

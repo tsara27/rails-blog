@@ -2,7 +2,7 @@ class ArticlesController < ApplicationController
   before_action :authenticate_user!, except: [:index,:show]
 
   def index
-      @articles = Article.all.reverse
+      @articles = Article.paginate(page: params[:page], per_page: 5).order("created_at desc")
   end
 
   def new

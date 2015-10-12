@@ -12,7 +12,15 @@
 //
 //= require jquery
 //= require bootstrap-sprockets
+//= require highlight
 //= require jquery_ujs
 //= require turbolinks
 //= require jquery.turbolinks
 //= require_tree .
+
+hljs.initHighlightingOnLoad();
+$(document).ready(function(){
+  $('pre').each(function(i, block) {
+  hljs.highlightBlock(block);
+  });
+})

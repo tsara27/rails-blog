@@ -1,0 +1,14 @@
+<%= form_for @user do |f| %>
+	<div class="form-group">
+		<label>Email</label>
+		<%= f.text_field :email, class: 'form-control' %>
+	</div>
+
+	<div class="form-group">
+		<label>Avatar</label>
+		<%= f.file_field :avatar, class: 'form-control' %>
+	</div>
+	<p>
+		<%= f.submit 'Save', class: 'btn btn-primary' %>
+	</p>
+<% end %>

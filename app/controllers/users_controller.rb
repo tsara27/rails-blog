@@ -13,13 +13,17 @@ class UsersController < ApplicationController
 
 	def update
 		@user = User.find(params[:id])
-		if @user.update(user_params)
-			redirect_to @user
+		if :avatar.empty?
+			@user.update(params[:name,:bio])
+		else
+			if @user.update(user_params)
+				redirect_to @user
+			end
 		end
 	end
 
 	private
 		def user_params
-			params.require(:user).permit(:avatar)
+			params.require(:user).permit(:avatar,:name,:bio)
 		end
 end

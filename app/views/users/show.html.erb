@@ -1,4 +1,32 @@
-<div class="container">
-	<%= image_tag @user.avatar.url(:medium) %>
-	<%= @user.email %>
+<% provide :title, @user.name %>
+<div class="container" style="padding-top:50px">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="text-center">
+				<%= image_tag @user.avatar.url(:medium), class: "img-circle" %>
+			</div>
+			<header class="page-header text-center">
+				<h2>
+					<%= @user.name %> <small><%= @user.articles.length %> Articles</small>
+				</h2>
+				<%= @user.bio[0..150].html_safe %>
+				<% if current_user == @user %>
+					<%= link_to 'Edit', edit_user_path(@user.id) %>
+				<% end %>
+			</header>
+
+			<% @user.articles.each do |item| %>
+					<article class="home-lists">
+							<header>
+									<h2><%= link_to item.title, item %></h2>
+							</header>
+							<section>
+									<%= item.content[0..250].html_safe %> ...
+							</section>
+							<hr>
+							<small>Created at <%= time_ago_in_words(item.created_at) %> ago, By <%= link_to item.user.name, user_path(item.user.id) %></small>
+					</article>
+			<% end %>
+		</div>
+	</div>
 </div>

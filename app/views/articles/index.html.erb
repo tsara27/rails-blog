@@ -8,13 +8,14 @@
             <% @articles.each do |item| %>
                 <article class="home-lists">
                     <header>
-                        <h2><%= link_to item.title, item %> <small><%= time_ago_in_words(item.created_at) %> ago</small></h2>
+                        <h2><%= link_to item.title, item %></h2>
                     </header>
                     <section>
-                        <%= item.content.html_safe %>
+                        <%= item.content[0..250].html_safe %> ...
                     </section>
+                    <hr>
+                    <small>Created at <%= time_ago_in_words(item.created_at) %> ago, By <%= link_to item.user.name, user_path(item.user.id) %></small>
                 </article>
-                <hr>
             <% end %>
 
             <%= will_paginate @articles %>

@@ -32,24 +32,33 @@
 
             <div id="comments">
               <% @comments.each do |item| %>
-                <div class="media">
+                <div class="media" id="edit_comment_<%= item.id %>">
                   <div class="media-left">
                     <a href="<%= user_path(item.user.id) %>">
                       <%= image_tag item.user.avatar.url(:thumb), class: "media-object img-rounded", width:"70px" %>
                     </a>
                   </div>
                   <div class="media-body">
-                    <h4 class="media-heading"><%= item.user.name %> at <small><%= time_ago_in_words(item.created_at) %> ago</small></h4>
+                    <h4 class="media-heading">
+                      <%= item.user.name %> at
+                      <small><%= time_ago_in_words(item.created_at) %> ago</small>
+                      <div class="pull-right">
+                        <%= link_to '<small><i class="fa fa-trash"></i> delete</small>'.html_safe, article_comment_path(@article.id, item.id), method: :delete, remote: true, data: {confirm: "Are you sure ?"}, class: 'text-danger' %> 
+                      </div>
+                    </h4>
                     <%= item.content.html_safe %>
                   </div>
+                  <hr>
                 </div>
-                <hr>
               <% end %>
             </div>
 
             <% if user_signed_in? %>
               <div id="form-comment">
-                <%= form_for([@article, @article.comments.build]) do |f| %>
+                <%= form_for([@article, @article.comments.build], remote: true) do |f| %>
+                  <div class="hidden">
+                    <%= f.text_field :id, value: @article.id %>
+                  </div>
                   <div class="media">
                     <div class="media-left">
                       <%= image_tag current_user.avatar.url(:thumb), class: "media-object img-rounded", width:"70px" %>

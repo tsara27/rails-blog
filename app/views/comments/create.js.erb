@@ -1,0 +1,19 @@
+$("#comments").append(
+  '<div class="media" id="edit_comment_<%= @comment.id %>">' +
+    '<div class="media-left">' +
+      '<a href="<%= user_path(@comment.user.id) %>">' +
+        '<%= image_tag @comment.user.avatar.url(:thumb), class: "media-object img-rounded", width:"70px" %>' +
+      '</a>' +
+    '</div>' +
+    '<div class="media-body">' +
+      '<h4 class="media-heading"><%= @comment.user.name %> at <small><%= time_ago_in_words(@comment.created_at) %>' +
+      ' ago</small>' +
+      '</h4>' +
+      '<div class="pull-right">' +
+        '<%= link_to "<small>delete</small>".html_safe, article_comment_path(@article.id, @comment.id), method: :delete, remote: true, data: {confirm: "Are you sure ?"} %> ' +
+      '</div>' +
+      '<%= @comment.content.html_safe %>' +
+    '</div>' +
+  '</div>'
+);
+$("#comment_content").val("");

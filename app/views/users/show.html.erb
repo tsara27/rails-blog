@@ -15,13 +15,13 @@
 				<% end %>
 			</header>
 
-			<% @user.articles.each do |item| %>
+			<% @user.articles.reverse.each do |item| %>
 					<article class="home-lists">
 							<header>
 									<h2><%= link_to item.title, item %></h2>
 							</header>
 							<section>
-									<%= item.content[0..250].html_safe %> ...
+									<%= ("<p>" + item.content[0..250] + "<p>").html_safe %>
 							</section>
 							<hr>
 							<small>Created at <%= time_ago_in_words(item.created_at) %> ago, By <%= link_to item.user.name, user_path(item.user.id) %></small>

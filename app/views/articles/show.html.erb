@@ -4,9 +4,9 @@
         <div class="col-md-8 col-md-offset-2">
             <article>
                 <header class="page-header">
-                    <h2>
+                    <h1>
                         <%= @article.title %>
-                    </h2>
+                    </h1>
                     <small>By: <%= @article.user.email %></small>
                     <% if current_user == @article.user %>
                       <%= link_to 'Edit', edit_article_path(@article) %>
@@ -18,6 +18,52 @@
                     <%= @article.content.html_safe %>
                 </section>
             </article>
+            <br>
+
+            <header class="page-header">
+              <% if @article.comments.empty? %>
+                <% if user_signed_in? %>
+                  <h3>Be The First commenter to this article !</h3>
+                <% end %>
+              <% else %>
+                <h4>This article have <%= @article.comments.length %> comments</h4>
+              <% end %>
+            </header>
+
+            <div id="comments">
+              <% @comments.each do |item| %>
+                <div class="media">
+                  <div class="media-left">
+                    <a href="<%= user_path(item.user.id) %>">
+                      <%= image_tag item.user.avatar.url(:thumb), class: "media-object img-rounded", width:"70px" %>
+                    </a>
+                  </div>
+                  <div class="media-body">
+                    <h4 class="media-heading"><%= item.user.name %> at <small><%= time_ago_in_words(item.created_at) %> ago</small></h4>
+                    <%= item.content.html_safe %>
+                  </div>
+                </div>
+                <hr>
+              <% end %>
+            </div>
+
+            <% if user_signed_in? %>
+              <div id="form-comment">
+                <%= form_for([@article, @article.comments.build]) do |f| %>
+                  <div class="media">
+                    <div class="media-left">
+                      <%= image_tag current_user.avatar.url(:thumb), class: "media-object img-rounded", width:"70px" %>
+                    </div>
+                    <div class="media-body">
+                      <%= f.text_field :content, class: "form-control comment-field", placeholder: "What do you say ?" %>
+                    </div>
+                  </div>
+                  <div class="hidden">
+                    <%= f.submit "Save Comment", class: 'btn btn-primary' %>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
         </div>
     </div>
 </div>

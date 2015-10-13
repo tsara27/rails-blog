@@ -9,6 +9,7 @@
                 <article class="home-lists">
                     <header>
                         <h2><%= link_to item.title, item %></h2>
+                        <small><%= item.comments.length %> Comments</small>
                     </header>
                     <section>
                         <%= ("<p>" + item.content[0..250] + "<p>").html_safe %>

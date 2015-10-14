@@ -9,9 +9,21 @@
 				<h2>
 					<%= @user.name %> <small><%= @user.articles.length %> Articles</small>
 				</h2>
+				<h4><span id="followers"><%= @user.followers.count %></span> Followers | <span id="following"><%= @user.following.count %></span> Following</h4>
 				<%= @user.bio[0..150].html_safe %>
 				<% if current_user == @user %>
-					<%= link_to 'Edit', edit_user_path(@user.id) %>
+					<div>
+						<%= link_to 'Settings', edit_user_path(@user.id), class: "btn btn-primary" %>
+					</div>
+				<% end %>
+				<% if user_signed_in? && current_user != @user %>
+					<div id="follow-form">
+						<% if current_user.following?(@user) %>
+							<%= render 'unfollow' %>
+						<% else %>
+							<%= render 'follow' %>
+						<% end %>
+					</div>
 				<% end %>
 			</header>
 

@@ -2,7 +2,11 @@ class ArticlesController < ApplicationController
   before_action :authenticate_user!, except: [:index,:show]
 
   def index
-      @articles = Article.paginate(page: params[:page], per_page: 10).order("created_at desc")
+      if current_user
+        @articles = current_user.feed.paginate(page: params[:page], per_page: 10).order("created_at desc")
+      else
+        @articles = Article.paginate(page: params[:page], per_page: 10).order("created_at desc")
+      end
 
       respond_to do |format|
         format.html { @articles }

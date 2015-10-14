@@ -3,6 +3,12 @@ Rails.application.routes.draw do
   resources :articles do
     resources :comments
   end
-  resources :users
+  resources :users do
+    member do
+      get :follwoing, :followers
+    end
+  end
   root "articles#index"
+
+  resources :relationships, only: [:create, :destroy]
 end

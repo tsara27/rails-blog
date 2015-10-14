@@ -74,3 +74,12 @@ article.home-lists, article.home-lists p{
   border-radius: 5px !important;
   word-break: break-word;
 }
+a.navbar-brand>img{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+ul.nav.navbar-nav{
+  margin-left: -30px;
+}

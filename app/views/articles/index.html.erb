@@ -1,22 +1,13 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <header class="page-header text-center">
-              <%= image_tag('logo2.svg', width: '140px') %>
-              <h1>Sebab apalagi yang disisakan kematian, selain kenangan dan kata-kata.</h1>
+            <header class="page-header">
+              <h1 class="home-quotes">
+                "Sebab apalagi yang disisakan kematian, selain kenangan dan kata-kata."
+              </h1>
             </header>
             <% @articles.each do |item| %>
-                <article class="home-lists">
-                    <header>
-                        <h2><%= link_to item.title, item %></h2>
-                        <small><%= item.comments.length %> Comments</small>
-                    </header>
-                    <section>
-                        <%= ("<p>" + item.content[0..250] + "<p>").html_safe %>
-                    </section>
-                    <hr>
-                    <small><%= time_ago_in_words(item.created_at) %> ago | by <%= link_to item.user.name, user_path(item.user.id) %></small>
-                </article>
+              <%= render 'partials/article_list',item: item %>
             <% end %>
 
             <%= will_paginate @articles %>

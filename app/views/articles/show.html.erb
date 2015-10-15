@@ -2,12 +2,13 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <article>
+            <article class="details">
                 <header class="page-header">
                     <h1>
                         <%= @article.title %>
                     </h1>
-                    <small>By: <%= @article.user.email %></small>
+                    <%= link_to image_tag(@article.user.avatar.url(:thumb), class: 'img-circle', style: 'width:38px; margin-right: 5px'), @article.user %>
+                    <small><%= link_to @article.user.name, @article.user %></small>
                     <% if current_user == @article.user %>
                       <%= link_to 'Edit', edit_article_path(@article) %>
                       <%= link_to 'Delete', article_path(@article), method: :delete, data: { confirm: 'Kamu yakin ?' } %>
@@ -23,10 +24,10 @@
             <header class="page-header">
               <% if @article.comments.empty? %>
                 <% if user_signed_in? %>
-                  <h3>Be The First commenter to this article !</h3>
+                  <h4>Be The First commenter to this article !</h4>
                 <% end %>
               <% else %>
-                <h3>This article have <%= @article.comments.length %> comments</h3>
+                <h4>This article have <%= @article.comments.length %> comments</h4>
               <% end %>
             </header>
 
@@ -35,7 +36,7 @@
                 <div class="media" id="edit_comment_<%= item.id %>">
                   <div class="media-left">
                     <a href="<%= user_path(item.user.id) %>">
-                      <%= image_tag item.user.avatar.url(:thumb), class: "media-object img-rounded", width:"70px" %>
+                      <%= image_tag item.user.avatar.url(:thumb), class: "media-object img-circle", width:"70px" %>
                     </a>
                   </div>
                   <div class="media-body">
@@ -43,7 +44,7 @@
                       <%= item.user.name %> at
                       <small><%= time_ago_in_words(item.created_at) %> ago</small>
                       <div class="pull-right">
-                        <%= link_to '<small><i class="fa fa-trash"></i> delete</small>'.html_safe, article_comment_path(@article.id, item.id), method: :delete, remote: true, data: {confirm: "Are you sure ?"}, class: 'text-danger' %> 
+                        <%= link_to '<small><i class="fa fa-trash"></i> delete</small>'.html_safe, article_comment_path(@article.id, item.id), method: :delete, remote: true, data: {confirm: "Are you sure ?"}, class: 'text-danger' %>
                       </div>
                     </h4>
                     <%= item.content.html_safe %>
@@ -61,7 +62,7 @@
                   </div>
                   <div class="media">
                     <div class="media-left">
-                      <%= image_tag current_user.avatar.url(:thumb), class: "media-object img-rounded", width:"70px" %>
+                      <%= image_tag current_user.avatar.url(:thumb), class: "media-object img-circle", width:"70px" %>
                     </div>
                     <div class="media-body">
                       <%= f.text_field :content, class: "form-control comment-field", placeholder: "What do you say ?" %>

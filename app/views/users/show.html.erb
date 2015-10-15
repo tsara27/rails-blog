@@ -7,13 +7,13 @@
 			</div>
 			<header class="page-header text-center">
 				<h2>
-					<%= @user.name %> <small><%= @user.articles.length %> Articles</small>
+					<%= @user.name %>
+					<br>
+					<small><%= @user.articles.length %> Articles <span id="followers"><%= @user.followers.count %></span> Followers <span id="following"><%= @user.following.count %></span> Following</small>
 				</h2>
-				<h4><span id="followers"><%= @user.followers.count %></span> Followers | <span id="following"><%= @user.following.count %></span> Following</h4>
-				<%= @user.bio[0..150].html_safe %>
 				<% if current_user == @user %>
 					<div>
-						<%= link_to 'Settings', edit_user_path(@user.id), class: "btn btn-primary" %>
+						<%= link_to 'Settings', edit_user_path(@user.id), class: "btn btn-default btn-rounded btn-lg" %>
 					</div>
 				<% end %>
 				<% if user_signed_in? && current_user != @user %>
@@ -28,16 +28,7 @@
 			</header>
 
 			<% @user.articles.reverse.each do |item| %>
-					<article class="home-lists">
-							<header>
-									<h2><%= link_to item.title, item %></h2>
-							</header>
-							<section>
-									<%= ("<p>" + item.content[0..250] + "<p>").html_safe %>
-							</section>
-							<hr>
-							<small>Created at <%= time_ago_in_words(item.created_at) %> ago, By <%= link_to item.user.name, user_path(item.user.id) %></small>
-					</article>
+				<%= render 'partials/article_list',item: item %>
 			<% end %>
 		</div>
 	</div>

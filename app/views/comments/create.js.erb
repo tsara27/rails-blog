@@ -13,7 +13,7 @@ $("#comments").append(
         '<%= link_to "<small>delete</small>".html_safe, article_comment_path(@article.id, @comment.id), method: :delete, remote: true, data: {confirm: "Are you sure ?"} %> ' +
       '</div>' +
       '<%= @comment.content.html_safe %>' +
-    '</div>' +
+    '</div><hr>' +
   '</div>'
 );
 $("#comment_content").val("");

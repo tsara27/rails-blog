@@ -1,0 +1,17 @@
+<article class="home-lists">
+    <div class="profile-details-feed">
+      <%= image_tag(item.user.avatar.url(:thumb), class: "img-circle") %>
+      <span>
+        <%= link_to item.user.name, item.user %> <br>
+        <small class="mute"><%= time_ago_in_words(item.created_at) %> ago</small>
+      </span>
+    </div>
+    <header>
+        <h2><%= link_to item.title, item %></h2>
+    </header>
+    <section>
+        <%= ("<p>" + item.content[0..250] + "<p>").html_safe %>
+    </section>
+    <hr>
+    <small><%= item.comments.length %> Comments</small>
+</article>

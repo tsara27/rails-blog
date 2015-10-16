@@ -7,4 +7,12 @@ class Article < ActiveRecord::Base
     def to_param
       slug
     end
+
+    def next
+      self.class.where("id > :id",id: id).take(1)
+    end
+
+    def prev
+      self.class.where("id < :id",id: id).take(1)
+    end
 end

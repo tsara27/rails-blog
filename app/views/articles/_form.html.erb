@@ -8,7 +8,7 @@
     </div>
 <% end %>
 
-<%= form_for @article do |f| %>
+<%= form_for @article, remote: true do |f| %>
     <div class="form-group">
         <%= f.text_field :title, class: 'form-control input-lg', placeholder: 'Title here ..' %>
     </div>
@@ -16,7 +16,17 @@
     <div class="form-group">
         <%= f.text_area :content, class: 'summernote', style: 'height: 250px' %>
     </div>
-    <p>
-        <%= f.submit 'Save Article', class: 'btn btn-primary btn-block' %>
-    </p>
+
+    <div class="row">
+      <div class="col-md-6">
+
+      </div>
+      <div class="col-md-6">
+        <div class="btn-group pull-right" role="group">
+          <%= f.submit 'Save to Draft', class: 'btn btn-default btn-lg', name: "draft" %>
+          <%= f.submit 'Publish', class: 'btn btn-primary btn-lg', name: "publish" %>
+        </div>
+      </div>
+    </div>
+    
 <% end %>

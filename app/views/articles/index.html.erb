@@ -7,7 +7,7 @@
               </h1>
             </header>
             <% @articles.each do |item| %>
-              <%= render 'partials/article_list',item: item %>
+              <%= render 'partials/article_list',item: item if item.published? %>
             <% end %>
 
             <%= will_paginate @articles %>

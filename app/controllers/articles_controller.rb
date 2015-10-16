@@ -36,10 +36,24 @@ class ArticlesController < ApplicationController
       @article = current_user.articles.build(article_params)
       @article.slug = "#{to_slug(params[:article][:title])}-#{randomString(6)}"
 
-      if @article.save
-          redirect_to @article
+      if params[:publish]
+        @article.published = 1
       else
-          render 'new'
+        @article.published = 0
+      end
+
+      respond_to do |format|
+        if @article.save
+          @saved = true
+          format.html { redirect_to @article }
+          format.js
+          format.json { @article }
+        else
+          @saved = false
+          format.html { redirect_to 'new' }
+          format.js
+          format.json { @article }
+        end
       end
   end
 

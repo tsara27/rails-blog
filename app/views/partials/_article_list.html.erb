@@ -1,8 +1,16 @@
 <article class="home-lists">
     <div class="profile-details-feed">
-      <%= image_tag(item.user.avatar.url(:thumb), class: "img-circle") %>
+      <% if item.anon? %>
+        <%= image_tag('anon-thumb.jpg', class: "img-circle") %>
+      <% else %>
+        <%= image_tag(item.user.avatar.url(:thumb), class: "img-circle") %>
+      <% end %>
       <span>
-        <%= link_to item.user.name, item.user %> <br>
+        <% if item.anon? %>
+          <%= link_to "anynomous", anon_path %> <br>
+        <% else %>
+          <%= link_to item.user.name, item.user %> <br>
+        <% end %>
         <small class="mute"><%= time_ago_in_words(item.created_at) %> ago</small>
       </span>
     </div>

@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  root "articles#index"
+  get "/anynomous", to: "users#anynomous", as: "anon"
+
   devise_for :users
   resources :articles do
     resources :comments
@@ -8,7 +11,6 @@ Rails.application.routes.draw do
       get :follwoing, :followers
     end
   end
-  root "articles#index"
 
   resources :relationships, only: [:create, :destroy]
 end

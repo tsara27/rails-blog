@@ -8,7 +8,7 @@
     </div>
 <% end %>
 
-<%= form_for @article, remote: true do |f| %>
+<%= form_for @article do |f| %>
     <div class="form-group">
         <%= f.text_field :title, class: 'form-control input-lg', placeholder: 'Title here ..' %>
     </div>
@@ -19,7 +19,11 @@
 
     <div class="row">
       <div class="col-md-6">
-
+        Post As : <br>
+        <select name="anon" class="form-control">
+          <option value="false"><%= current_user.name %></option>
+          <option value="true">Anynomous</option>
+        </select>
       </div>
       <div class="col-md-6">
         <div class="btn-group pull-right" role="group">

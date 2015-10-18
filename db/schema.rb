@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151016003733) do
+ActiveRecord::Schema.define(version: 20151018194901) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20151016003733) do
     t.integer  "user_id",    limit: 4
     t.string   "slug",       limit: 255
     t.boolean  "published"
+    t.boolean  "anon"
   end
 
   add_index "articles", ["slug"], name: "index_articles_on_slug", using: :btree

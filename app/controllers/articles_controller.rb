@@ -35,6 +35,7 @@ class ArticlesController < ApplicationController
   def create
       @article = current_user.articles.build(article_params)
       @article.slug = "#{to_slug(params[:article][:title])}-#{randomString(6)}"
+      @article.anon = params[:anon]
 
       if params[:publish]
         @article.published = 1

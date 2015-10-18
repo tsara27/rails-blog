@@ -1,0 +1,21 @@
+<% provide :title, 'Anynomous' %>
+<div class="container" style="padding-top:50px">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="text-center">
+				<%= image_tag 'anon-medium.jpg', class: "img-circle" %>
+			</div>
+			<header class="page-header text-center">
+				<h2>
+					<%= "Anynomous" %>
+					<br>
+					<small><%= @articles.length %> Articles </small>
+				</h2>
+			</header>
+
+			<% @articles.reverse.each do |item| %>
+				<%= render 'partials/article_list',item: item %>
+			<% end %>
+		</div>
+	</div>
+</div>

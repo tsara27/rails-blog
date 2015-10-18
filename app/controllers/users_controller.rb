@@ -22,6 +22,10 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def anynomous
+		@articles = Article.where('anon = true').all
+	end
+
 	private
 		def user_params
 			params.require(:user).permit(:avatar,:name,:bio)

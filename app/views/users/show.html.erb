@@ -28,7 +28,9 @@
 			</header>
 
 			<% @user.articles.reverse.each do |item| %>
-				<%= render 'partials/article_list',item: item %>
+				<% unless item.anon? %>
+					<%= render 'partials/article_list',item: item %>
+				<% end %>
 			<% end %>
 		</div>
 	</div>

@@ -7,8 +7,13 @@
                     <h1>
                         <%= @article.title %>
                     </h1>
-                    <%= link_to image_tag(@article.user.avatar.url(:thumb), class: 'img-circle', style: 'width:38px; margin-right: 5px'), @article.user %>
-                    <small><%= link_to @article.user.name, @article.user %></small>
+                    <% if @article.anon? %>
+                      <%= link_to image_tag('anon-thumb.jpg', class: 'img-circle', style: 'width:38px; margin-right: 5px'), anon_path %>
+                      <small><%= link_to 'Anynomous', anon_path %></small>
+                    <% else %>
+                      <%= link_to image_tag(@article.user.avatar.url(:thumb), class: 'img-circle', style: 'width:38px; margin-right: 5px'), @article.user %>
+                      <small><%= link_to @article.user.name, @article.user %></small>
+                    <% end %>
                     <% if current_user == @article.user %>
                       <%= link_to 'Edit', edit_article_path(@article) %>
                       <%= link_to 'Delete', article_path(@article), method: :delete, data: { confirm: 'Kamu yakin ?' } %>

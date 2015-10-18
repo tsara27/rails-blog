@@ -23,4 +23,12 @@ $(document).ready(function(){
   $('pre').each(function(i, block) {
   hljs.highlightBlock(block);
   });
+
+  $("#publish-btn").click(function() {
+    $(this).button('loading');
+  })
+
+  $("#draft-btn").click(function() {
+    $(this).button('loading');
+  })
 })

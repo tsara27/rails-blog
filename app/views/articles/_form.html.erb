@@ -23,10 +23,10 @@
       </div>
       <div class="col-md-6">
         <div class="btn-group pull-right" role="group">
-          <%= f.submit 'Save to Draft', class: 'btn btn-default btn-lg', name: "draft" %>
-          <%= f.submit 'Publish', class: 'btn btn-primary btn-lg', name: "publish" %>
+          <input type="submit" value="Save to Draft" class="btn btn-default btn-lg" data-loading-text="Saving ..." name="draft" id="draft-btn">
+          <input type="submit" value="Publish" class="btn btn-primary btn-lg" data-loading-text="Saving ..." name="publish" id="publish-btn">
         </div>
       </div>
     </div>
-    
+
 <% end %>

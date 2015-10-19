@@ -1,0 +1,10 @@
+var $saved = "<%= @saved %>";
+var $published = "<%= @article.published %>";
+if ($saved && $published) {
+  window.location.assign("/articles/" + "<%= @article.slug %>");
+}else if($saved && !$published){
+  alert("Saved to draft");
+  $("#draft-btn").button('reset');
+}else{
+  alert("errors");
+}

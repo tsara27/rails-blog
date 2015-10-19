@@ -113,3 +113,12 @@ h1 small, h1 .small, .h1 small, .h1 .small, h2 small, h2 .small, .h2 small, .h2 
     font-size: 60%;
     font-weight: 300;
 }
+
+.tags{
+  display: inline;
+  a{
+    background: #337AB7;
+    padding: 2px 5px;
+    color: white;
+  }
+}

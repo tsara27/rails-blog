@@ -1,0 +1,7 @@
+<% unless tags.empty? %>
+  <% tags.each do |item| %>
+    <div class="tags">
+      <%= link_to item.name, tag_path(item.name) %>
+    </div>
+  <% end %>
+<% end %>

@@ -1,4 +1,6 @@
 class Article < ActiveRecord::Base
+    acts_as_taggable
+    acts_as_taggable_on :topics
     validates :title, presence: true, length: { minimum: 5 }
     validates :slug, presence: true, uniqueness: { case_sensitive: false }
     belongs_to :user

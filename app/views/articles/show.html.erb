@@ -23,6 +23,8 @@
                 <section>
                     <%= @article.content.html_safe %>
                 </section>
+                <br>
+                <small>Tags : <%= render('partials/tags',{tags: @article.topics}) %></small>
             </article>
             <br>
 

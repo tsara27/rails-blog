@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :authenticate_user!, except: [:index,:show]
+  before_action :fetch_article, except: [:index, :new, :create]
 
   def index
     if params[:tag]
@@ -20,13 +21,9 @@ class ArticlesController < ApplicationController
     @article = current_user.articles.build
   end
 
-  def edit
-    @article = Article.find_by_slug(params[:id])
-  end
+  def edit; end
 
   def update
-    @article = Article.find_by_slug(params[:id])
-
     @article.save
 
     respond_to do |format|
@@ -65,12 +62,10 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @article = Article.find_by_slug(params[:id])
     @comments = Comment.where(article_id: @article.id).all
   end
 
   def destroy
-    @article = Article.find_by_slug(params[:id])
     @article.destroy
 
     redirect_to articles_path
@@ -84,5 +79,9 @@ class ArticlesController < ApplicationController
     published = params[:publish] ? 1 : 0
     params.require(:article).permit(:title, :content, :topic_list).merge(published: published)
     # Add space between each attributes. 
+  end
+  
+  def fetch_article
+    @article = Article.find_by_slug(params[:id])
   end
 end

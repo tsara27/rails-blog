@@ -93,6 +93,7 @@ class ArticlesController < ApplicationController
   # Don't have to add indentation to show private method. You can only add one empty line
   # https://github.com/bbatsov/ruby-style-guide#consistent-classes
   def article_params
-    params.require(:article).permit(:title,:content,:topic_list)
+    params.require(:article).permit(:title, :content, :topic_list)
+    # Add space between each attributes. 
   end
 end

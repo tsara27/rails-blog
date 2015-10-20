@@ -27,12 +27,6 @@ class ArticlesController < ApplicationController
   def update
     @article = Article.find_by_slug(params[:id])
 
-    if params[:publish]
-      @article.published = 1
-    else
-      @article.published = 0
-    end
-
     @article.save
 
     respond_to do |format|
@@ -54,12 +48,6 @@ class ArticlesController < ApplicationController
     @article = current_user.articles.build(article_params)
     @article.slug = "#{to_slug(params[:article][:title])}-#{randomString(6)}"
     @article.anon = params[:anon]
-
-    if params[:publish]
-      @article.published = 1
-    else
-      @article.published = 0
-    end
 
     respond_to do |format|
       if @article.save
@@ -93,7 +81,8 @@ class ArticlesController < ApplicationController
   # Don't have to add indentation to show private method. You can only add one empty line
   # https://github.com/bbatsov/ruby-style-guide#consistent-classes
   def article_params
-    params.require(:article).permit(:title, :content, :topic_list)
+    published = params[:publish] ? 1 : 0
+    params.require(:article).permit(:title, :content, :topic_list).merge(published: published)
     # Add space between each attributes. 
   end
 end

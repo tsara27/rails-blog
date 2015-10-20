@@ -62,7 +62,8 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @comments = Comment.where(article_id: @article.id).all
+    @comments = Comment.where(article_id: @article.id)
+    # all is not required after using where
   end
 
   def destroy
